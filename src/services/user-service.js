@@ -28,6 +28,18 @@ class UserService{
             throw error;
         }
     }
+
+    async get(userId){
+        try {
+            const user = await this.UserRepository.findByPk(userId , {
+                attributes :['email' , 'id']
+            });
+            return user;
+        } catch (error) {
+            console.log('something went wrong in servuce layer')
+            throw error;
+        }
+    }
 }
 
 module.exports = UserService;

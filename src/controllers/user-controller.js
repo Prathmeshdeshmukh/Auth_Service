@@ -26,6 +26,27 @@ const create = async (req, res)=>{
     }
 }
 
+const get = async (req, res)=>{
+    try {
+        const user = await userService.get(req.params.id);
+        return res.status(200).json({
+            data: user,
+            success:true,
+            err:{},
+            message : 'successfully fetched a user'
+        })
+    } catch (error) {
+        console.log('something went wrong');
+        return res.status(500).json({
+            message: 'not able to create user',
+            data :{},
+            err : error,
+            success:false 
+        })
+    }
+}
+
 module.exports = {
-    create
+    create,
+    get
 }
