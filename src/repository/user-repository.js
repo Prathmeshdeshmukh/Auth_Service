@@ -37,6 +37,9 @@ class UserRepository{
             throw {error };
         }
     }
+
+    
 }
+
 
 module.exports = UserRepository;

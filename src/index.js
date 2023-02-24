@@ -16,10 +16,7 @@ const setupAndStartServer = () =>{
 
     app.listen(PORT , async ()=>{
         console.log("Server started on PORT" , PORT);
-        // const incomingpassword ='deshmukh2222';
-        // const user = await User.findByPk(3);
-        // const response = bycrpt.compareSync(incomingpassword , user.password);
-        // console.log(response);  
+         
     })
 }
 
