@@ -5,12 +5,12 @@ const bcrypt = require('bcrypt');
 
 class UserService{
     constructor(){
-        this.UserRepository = new UserRepository();
+        this.userRepository = new UserRepository();
     }
 
     async create(data){
         try {
-           const user = await this.UserRepository.create(data);
+           const user = await this.userRepository.create(data);
            return user; 
         } catch (error) {
             console.log("something went wrong in service layer");
@@ -20,7 +20,7 @@ class UserService{
 
     async destroy(userId){
         try {
-           await this.UserRepository.destroy({
+           await this.userRepository.destroy({
             where:{
                 id:userId
             }
@@ -34,13 +34,31 @@ class UserService{
 
     async get(userId){
         try {
-            const user = await this.UserRepository.findByPk(userId , {
+            const user = await this.userRepository.findByPk(userId , {
                 attributes :['email' , 'id']
             });
             return user;
         } catch (error) {
             console.log('something went wrong in servuce layer')
             throw error;
+        }
+    }
+
+    async signIn(email , plainPassword){
+        try {
+            const user = await this.userRepository.getByEmail(email);
+            const passwordMatch = this.checkPassword(plainPassword , user.password);
+            if(!passwordMatch){
+                console.log('Password doesnt match');
+                throw {error : 'Incorrect Password'}
+            }
+
+            const newJWT = this.createToken({email: user.email , id:user.id});
+            return newJWT;
+        } catch (error) {
+            console.log('something went wrong in sign in process');
+            throw error;
+            
         }
     }
 
