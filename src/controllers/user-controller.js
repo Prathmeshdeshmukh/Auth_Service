@@ -67,8 +67,32 @@ const signIn = async(req, res)=>{
 
 }
 
+const isAuthenticated = async (req, res)=>{
+    try {
+        const token =  req.header("x-access-token");
+        // const isverified = userService.verifyToken(token);
+        const response = await userService.isAuthenticated(token);
+        return res.status(200).json({
+            data: response,
+            sucess: true,
+            err:{},
+            message:"user is authenticated and token is valid"
+
+        })
+    } catch (error) {
+        console.log('something went wrong');
+        return res.status(500).json({
+            message: 'not able to create user',
+            data :{},
+            err : error,
+            success:false 
+        })
+    }
+}
+
 module.exports = {
     create,
     get,
-    signIn
+    signIn,
+    isAuthenticated
 }

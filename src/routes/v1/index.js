@@ -9,6 +9,8 @@ router.post('/signin' ,
  authReqValidate.validateUserAuth
  ,  UserController.signIn );
 
+ router.get('/isAuthenticated' , UserController.isAuthenticated);
+ 
 router.get('/user/:id' , UserController.get);
 
 module.exports = router;
