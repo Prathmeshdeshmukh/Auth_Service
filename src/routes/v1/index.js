@@ -13,4 +13,6 @@ router.post('/signin' ,
  
 router.get('/user/:id' , UserController.get);
 
+router.get('/isAdmin', UserController.isAdmin);
+
 module.exports = router;

@@ -22,10 +22,10 @@ const setupAndStartServer = () =>{
         //     db.sequelize.sync({alter : true});
         // }
 
-        const user1 = await User.findByPk(2);
-        const role1 = await Role.findByPk(2);
+        // const user1 = await User.findByPk(2);
+        // const role1 = await Role.findByPk(2);
 
-        user1.addRole(role1);
+        // user1.addRole(role1);
     })
 }
 
